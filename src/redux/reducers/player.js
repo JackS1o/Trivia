@@ -3,7 +3,7 @@ import { USER_LOGIN, USER_TOKEN } from '../actions';
 const INITIAL_STATE = {
   name: '',
   assertions: '',
-  score: '',
+  score: 0,
   gravatarEmail: '',
 };
 
