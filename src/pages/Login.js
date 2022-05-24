@@ -1,4 +1,7 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { fetchApi } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -23,9 +26,10 @@ class Login extends React.Component {
     });
   };
 
-  handleSubmit = () => {
-    // const { history } = this.props;
-    // history.push('/carteira');
+  handleSubmit = async () => {
+    const { history, returnApi } = this.props;
+    returnApi();
+    history.push('/game');
   }
 
   render() {
@@ -69,4 +73,13 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => ({
+  returnApi: (api) => dispatch(fetchApi(api)),
+});
+
+Login.propTypes = {
+  returnApi: PropTypes.arrayOf(Object).isRequired,
+  history: PropTypes.shape().isRequired,
+};
+
+export default connect(null, mapDispatchToProps)(Login);
