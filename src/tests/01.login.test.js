@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import React from 'react';
-import App from '../../App';
-import renderWithRouterAndRedux from './renderWithRouterAndRedux'
+import App from '../App';
+import renderWithRouterAndRedux from './helpers/renderWithRouterAndRedux'
 
 describe('Testes para a tela de login', () => {
   test('Testa se os inputs de nome e email estão renderizando', () => {
@@ -65,4 +65,29 @@ describe('Testes para a tela de login', () => {
     expect(inputs[1]).toHaveValue('Jogador Um');
     expect(btnPlay).not.toBeDisabled();
   });
-})
+  test('testa se o botão "Configurações" aparece na tela', () => {
+    renderWithRouterAndRedux(<App />);
+    const btnPlay = screen.getByRole('button', { name: 'Configurações'});
+    expect(btnPlay).toBeDefined();
+  });
+  test('Testa se ao apertar no botão "Play" é redirecionado para "/play"', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    const inputs = screen.getAllByRole('textbox');
+    const btnPlay = screen.getByRole('button', { name: 'Play'});
+    userEvent.type(inputs[0], 'exemplo@email.com');
+    expect(inputs[0]).toHaveValue('exemplo@email.com');
+    userEvent.type(inputs[1], 'Jogador Um');
+    expect(inputs[1]).toHaveValue('Jogador Um');
+    expect(btnPlay).not.toBeDisabled();
+    userEvent.click(btnPlay);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/play');
+  });
+  test('Testa se ao clicar em "Configurações" é redirecionado para "/configuracoes"', () => {
+    const { history } = renderWithRouterAndRedux(<App />);
+    const btnConfiguracao = screen.getByRole('button', { name: 'Configurações' })
+    userEvent.click(btnConfiguracao);
+    const { pathname } = history.location;
+    expect(pathname).toBe('/configuracoes');
+  })
+});
