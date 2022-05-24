@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { fetchToken, startPlay } from '../redux/actions';
+import { fetchToken, startPlay, fetchApi } from '../redux/actions';
 
 class Login extends React.Component {
   constructor() {
@@ -26,16 +26,16 @@ class Login extends React.Component {
     });
   };
 
-  handleSubmit = () => {
-    const { history, userLogin, tokenAPI } = this.props;
+  handleSubmit = async () => {
+    const { history, userLogin, tokenAPI, returnApi } = this.props;
     const { email, Username } = this.state;
     const info = {
       email,
       Username,
     };
-
+    await returnApi();
     userLogin(info);
-    tokenAPI();
+    await tokenAPI();
     history.push('/play');
   }
 
@@ -93,9 +93,15 @@ class Login extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  returnApi: (api) => dispatch(fetchApi(api)),
   userLogin: (info) => dispatch(startPlay(info)),
   tokenAPI: () => dispatch(fetchToken()),
 });
+
+Login.propTypes = {
+  returnApi: PropTypes.arrayOf(Object).isRequired,
+  history: PropTypes.shape().isRequired,
+};
 
 Login.propTypes = {
   userLogin: PropTypes.func.isRequired,
