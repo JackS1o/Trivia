@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Header from '../components/Header';
 
 class Game extends React.Component {
   constructor() {
@@ -22,7 +23,9 @@ class Game extends React.Component {
     }
     return (
       <div>
-        { apiData
+        <div>
+          <Header />
+          { apiData
         && (
           <div>
             <h4>{apiData[counter].category}</h4>
@@ -58,13 +61,14 @@ class Game extends React.Component {
               </button>
             </div>
           </div>)}
+        </div>
       </div>
     );
   }
 }
 
 const mapStateToProps = (state) => ({
-  apiData: state.player.api,
+  apiData: state.player.APII,
 });
 
 Game.propTypes = {
