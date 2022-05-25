@@ -93,7 +93,6 @@ const mapStateToProps = (state) => ({
 
 TriviaQuestions.propTypes = {
   apiData: PropTypes.arrayOf(Object).isRequired,
-  // history: PropTypes.shape().isRequired,
 };
 
 export default connect(mapStateToProps)(TriviaQuestions);
