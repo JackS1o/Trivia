@@ -26,16 +26,15 @@ class Login extends React.Component {
     });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { history, userLogin, tokenAPI } = this.props;
     const { email, Username } = this.state;
     const info = {
       email,
       Username,
     };
-
     userLogin(info);
-    tokenAPI();
+    await tokenAPI();
     history.push('/play');
   }
 
@@ -100,7 +99,7 @@ const mapDispatchToProps = (dispatch) => ({
 Login.propTypes = {
   userLogin: PropTypes.func.isRequired,
   tokenAPI: PropTypes.func.isRequired,
-  history: PropTypes.arrayOf.isRequired,
+  history: PropTypes.shape().isRequired,
 };
 
 export default connect(null, mapDispatchToProps)(Login);

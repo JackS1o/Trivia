@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 
-export class Header extends Component {
+class Header extends Component {
   constructor() {
     super();
 
@@ -51,7 +51,7 @@ const mapStateToProps = (globalState) => ({
 
 Header.propTypes = {
   playerHeaderName: PropTypes.string.isRequired,
-  playerHeaderScore: PropTypes.string.isRequired,
+  playerHeaderScore: PropTypes.number.isRequired,
   playerHeaderEmail: PropTypes.string.isRequired,
 };
 
