@@ -7,7 +7,31 @@ class TriviaQuestions extends React.Component {
     super();
     this.state = {
       counter: 0,
+      answers: [],
+      category: '',
+      question: '',
+      correct: '',
     };
+  }
+
+  async componentDidMount() {
+    const token = localStorage.getItem('token');
+    const fetchQuestion = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+    const responseQuestions = await fetchQuestion.json();
+    const { counter } = this.state;
+
+    const {
+      category,
+      question,
+      correct_answer: correctAnswer,
+      incorrect_answers: incorrectAnswers,
+    } = responseQuestions.results[counter];
+
+    this.setState({
+      category,
+      question,
+      correct: correctAnswer,
+      answers: [...incorrectAnswers, correctAnswer] });
   }
 
   answerClick = () => {
@@ -16,8 +40,8 @@ class TriviaQuestions extends React.Component {
 
   render() {
     const { apiData } = this.props;
-    const { counter } = this.state;
-    console.log(apiData);
+    const { category, question, answers, correct } = this.state;
+    const RANDOMIZE_NUMBER = 0.5;
     return (
       <section>
         { apiData
@@ -26,50 +50,22 @@ class TriviaQuestions extends React.Component {
             <h4
               data-testid="question-category"
             >
-              {apiData[counter].category}
+              {category}
 
             </h4>
-            <p data-testid="question-text">{apiData[counter].question}</p>
+            <p data-testid="question-text">{question}</p>
             <div data-testid="answer-options">
-              {/* {apiData.map((question, index) => (
+              {answers.map((item, index) => (
                 <button
-                  key={ index }
-                  onClick={ this.answerClick }
                   type="button"
-                  // data-testid="correct-answer"
-                  data-testid={ question}
+                  key={ index }
+                  data-testid={
+                    correct === item ? 'correct-answer' : `wrong-answer-${index}`
+                  }
                 >
-                  {question[counter].correct_answer}
+                  { item }
                 </button>
-              ))} */}
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid="correct-answer"
-              >
-                {apiData[counter].correct_answer}
-              </button>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid={ `wrong-answer-${0}` }
-              >
-                {apiData[counter].incorrect_answers[0]}
-              </button>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid={ `wrong-answer-${1}` }
-              >
-                {apiData[counter].incorrect_answers[1]}
-              </button>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid={ `wrong-answer-${2}` }
-              >
-                {apiData[counter].incorrect_answers[2]}
-              </button>
+              )).sort(() => Math.random() - RANDOMIZE_NUMBER)}
             </div>
           </div>)}
       </section>
