@@ -1,4 +1,4 @@
-import { QUESTIONS, USER_LOGIN, USER_TOKEN } from '../actions';
+import { ERROR_TOKEN, USER_LOGIN, USER_TOKEN } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -9,11 +9,6 @@ const INITIAL_STATE = {
 
 const player = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-  case QUESTIONS:
-    return {
-      ...state,
-      api: action.api,
-    };
   case USER_LOGIN:
     return {
       ...state,
@@ -23,7 +18,12 @@ const player = (state = INITIAL_STATE, action) => {
   case USER_TOKEN:
     return {
       ...state,
-      APII: action.payload,
+      API: action.payload,
+    };
+  case ERROR_TOKEN:
+    return {
+      ...state,
+      error: action.payload,
     };
   default:
     return state;

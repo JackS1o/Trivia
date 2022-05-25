@@ -1,14 +1,32 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+// import PropTypes from 'prop-types';
+// import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Header from '../components/Header';
+import TriviaQuestions from '../components/TriviaQuestions';
 
 class Game extends React.Component {
   constructor() {
     super();
     this.state = {
       counter: 0,
+      redirect: false,
     };
+  }
+
+  async componentDidMount() {
+    const token = localStorage.getItem('token');
+    const result2 = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
+    const response = await result2.json();
+    const { response_code: code } = await response;
+    const VALUE_RESPONSE = 3;
+    console.log(response);
+    if (code === VALUE_RESPONSE) {
+      // const { history } = this.props;
+      localStorage.setItem('token', '');
+      // <Redirect to="/" />;
+      this.setState({ redirect: true });
+    }
   }
 
   answerClick = () => {
@@ -16,63 +34,28 @@ class Game extends React.Component {
   }
 
   render() {
-    const { apiData } = this.props;
-    const { counter } = this.state;
-    if (apiData) {
-      console.log(apiData);
-    }
+    // const { apiData } = this.props;
+    const { redirect } = this.state;
     return (
       <div>
         <div>
           <Header />
-          { apiData
-        && (
-          <div>
-            <h4>{apiData[counter].category}</h4>
-            <p data-testid="question-text">{apiData[counter].question}</p>
-            <div>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid="correct-answer"
-              >
-                {apiData[counter].correct_answer}
-              </button>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid={ `wrong-answer-${0}` }
-              >
-                {apiData[counter].incorrect_answers[0]}
-              </button>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid={ `wrong-answer-${1}` }
-              >
-                {apiData[counter].incorrect_answers[1]}
-              </button>
-              <button
-                onClick={ this.answerClick }
-                type="button"
-                data-testid={ `wrong-answer-${2}` }
-              >
-                {apiData[counter].incorrect_answers[2]}
-              </button>
-            </div>
-          </div>)}
+          { redirect ? <Redirect to="/" />
+            : (<TriviaQuestions />)}
         </div>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  apiData: state.player.APII,
-});
+// const mapStateToProps = (state) => ({
+//   apiData: state.player.API,
+// });
 
-Game.propTypes = {
-  apiData: PropTypes.arrayOf(Object).isRequired,
-};
+// Game.propTypes = {
+//   apiData: PropTypes.arrayOf(Object).isRequired,
+//   // history: PropTypes.shape().isRequired,
+// };
 
-export default connect(mapStateToProps)(Game);
+// export default connect(mapStateToProps)(Game);
+export default Game;
