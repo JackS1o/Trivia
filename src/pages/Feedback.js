@@ -1,19 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
 
 class Feedback extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+      redirect: false,
+    };
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      redirect: true,
+    });
+  }
+
   render() {
     const { playerTotalAssertions, playerFinalsScore } = this.props;
     const ASSERTIONS_NUMBER = 3;
+    const { redirect } = this.state;
     return (
       <div>
         <Header />
         <div data-testid="feedback-text">
-          {(playerTotalAssertions < ASSERTIONS_NUMBER
-            ? <h2>Could be better...</h2>
-            : <h2>Well Done!</h2>)}
+          {(playerTotalAssertions >= ASSERTIONS_NUMBER
+            ? <h2>Well Done!</h2>
+            : <h2>Could be better...</h2>)}
         </div>
         <div>
           <p data-testid="feedback-total-score">
@@ -24,6 +41,14 @@ class Feedback extends Component {
           </p>
 
         </div>
+        <button
+          data-testid="btn-ranking"
+          type="submit"
+          onClick={ this.handleSubmit }
+        >
+          Ranking
+        </button>
+        { redirect && <Redirect to="/ranking" /> }
       </div>
     );
   }

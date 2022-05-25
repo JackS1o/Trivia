@@ -1,5 +1,6 @@
 export const USER_LOGIN = 'USER_LOGIN';
 export const USER_TOKEN = 'USER_TOKEN';
+export const USER_SCORE = 'USER_SCORE';
 export const ERROR_TOKEN = 'ERROR_TOKEN';
 
 export const startPlay = (start) => ({
@@ -10,6 +11,11 @@ export const startPlay = (start) => ({
 export const setAPI = (token) => ({
   type: USER_TOKEN,
   payload: token,
+});
+
+export const setScore = (score) => ({
+  type: USER_SCORE,
+  payload: score,
 });
 
 export const fetchToken = () => async () => {
