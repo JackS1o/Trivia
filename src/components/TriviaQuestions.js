@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
+import { setScore } from '../redux/actions';
 
 class TriviaQuestions extends React.Component {
   constructor() {
@@ -13,6 +14,7 @@ class TriviaQuestions extends React.Component {
       question: '',
       correct: '',
       redirect: false,
+      score: 0,
     };
   }
 
@@ -44,6 +46,13 @@ class TriviaQuestions extends React.Component {
       () => this.componentDidMount());
   }
 
+  handleScore = () => {
+    this.setState((prev) => ({ score: prev.score + 1 }));
+    const { asserts } = this.props;
+    const { score } = this.state;
+    asserts(score);
+  }
+
   render() {
     const { apiData } = this.props;
     const { category, question, answers, correct, redirect } = this.state;
@@ -68,6 +77,7 @@ class TriviaQuestions extends React.Component {
                   data-testid={
                     correct === item ? 'correct-answer' : `wrong-answer-${index}`
                   }
+                  onClick={ correct === item ? this.handleScore : this.handleError }
                 >
                   { item }
                 </button>
@@ -91,8 +101,13 @@ const mapStateToProps = (state) => ({
   apiData: state.player.API,
 });
 
+const mapDispatchToProps = (dispatch) => ({
+  asserts: (asserts) => dispatch(setScore(asserts)),
+});
+
 TriviaQuestions.propTypes = {
   apiData: PropTypes.arrayOf(Object).isRequired,
+  asserts: PropTypes.func.isRequired,
 };
 
-export default connect(mapStateToProps)(TriviaQuestions);
+export default connect(mapStateToProps, mapDispatchToProps)(TriviaQuestions);

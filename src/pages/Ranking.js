@@ -7,7 +7,7 @@ class Ranking extends React.Component {
     return (
       <div>
         <Header />
-
+        <h3 data-testid="ranking-title">test</h3>
       </div>
 
     );
