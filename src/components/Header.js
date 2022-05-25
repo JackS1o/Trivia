@@ -51,7 +51,7 @@ const mapStateToProps = (globalState) => ({
 
 Header.propTypes = {
   playerHeaderName: PropTypes.string.isRequired,
-  playerHeaderScore: PropTypes.string.isRequired,
+  playerHeaderScore: PropTypes.number.isRequired,
   playerHeaderEmail: PropTypes.string.isRequired,
 };
 
