@@ -1,4 +1,4 @@
-import { ERROR_TOKEN, USER_LOGIN, USER_TOKEN } from '../actions';
+import { USER_LOGIN, USER_TOKEN } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -19,11 +19,6 @@ const player = (state = INITIAL_STATE, action) => {
     return {
       ...state,
       API: action.payload,
-    };
-  case ERROR_TOKEN:
-    return {
-      ...state,
-      error: action.payload,
     };
   default:
     return state;

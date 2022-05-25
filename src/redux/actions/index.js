@@ -7,29 +7,28 @@ export const startPlay = (start) => ({
   payload: start,
 });
 
-export const setToken = (token) => ({
+export const setAPI = (token) => ({
   type: USER_TOKEN,
   payload: token,
 });
-export const errorToken = () => ({
-  type: ERROR_TOKEN,
-  payload: '/',
-});
 
-export const fetchToken = () => async (dispatch) => {
+export const fetchToken = () => async () => {
   try {
     const response = await fetch('https://opentdb.com/api_token.php?command=request');
     const result = await response.json();
-    // console.log(result);
-    // const error = 'token';
     localStorage.setItem('token', result.token);
-    const result2 = await fetch(`https://opentdb.com/api.php?amount=5&token=${result.token}`);
+  } catch (error) {
+    // console.log(error)
+  }
+};
+
+export const fetchQuestions = () => async (dispatch) => {
+  try {
+    const token = localStorage.getItem('token');
+    const result2 = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const questionList = await result2.json();
     const { results } = questionList;
-    // if (results.length === 0) {
-    //   dispatch(errorToken());
-    // }
-    dispatch(setToken(results));
+    dispatch(setAPI(results));
   } catch (error) {
     // console.log(error)
   }

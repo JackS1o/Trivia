@@ -1,7 +1,8 @@
 import React from 'react';
-// import PropTypes from 'prop-types';
-// import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
+import { fetchQuestions } from '../redux/actions';
 import Header from '../components/Header';
 import TriviaQuestions from '../components/TriviaQuestions';
 
@@ -20,12 +21,12 @@ class Game extends React.Component {
     const response = await result2.json();
     const { response_code: code } = await response;
     const VALUE_RESPONSE = 3;
-    console.log(response);
     if (code === VALUE_RESPONSE) {
-      // const { history } = this.props;
       localStorage.setItem('token', '');
-      // <Redirect to="/" />;
       this.setState({ redirect: true });
+    } else {
+      const { questionAPI } = this.props;
+      questionAPI();
     }
   }
 
@@ -34,7 +35,6 @@ class Game extends React.Component {
   }
 
   render() {
-    // const { apiData } = this.props;
     const { redirect } = this.state;
     return (
       <div>
@@ -48,14 +48,12 @@ class Game extends React.Component {
   }
 }
 
-// const mapStateToProps = (state) => ({
-//   apiData: state.player.API,
-// });
+const mapDispatchToProps = (dispatch) => ({
+  questionAPI: () => dispatch(fetchQuestions()),
+});
 
-// Game.propTypes = {
-//   apiData: PropTypes.arrayOf(Object).isRequired,
-//   // history: PropTypes.shape().isRequired,
-// };
+Game.propTypes = {
+  questionAPI: PropTypes.func.isRequired,
+};
 
-// export default connect(mapStateToProps)(Game);
-export default Game;
+export default connect(null, mapDispatchToProps)(Game);

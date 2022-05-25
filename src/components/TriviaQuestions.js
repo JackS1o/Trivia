@@ -17,6 +17,7 @@ class TriviaQuestions extends React.Component {
   render() {
     const { apiData } = this.props;
     const { counter } = this.state;
+    console.log(apiData);
     return (
       <section>
         { apiData
@@ -30,6 +31,17 @@ class TriviaQuestions extends React.Component {
             </h4>
             <p data-testid="question-text">{apiData[counter].question}</p>
             <div data-testid="answer-options">
+              {/* {apiData.map((question, index) => (
+                <button
+                  key={ index }
+                  onClick={ this.answerClick }
+                  type="button"
+                  // data-testid="correct-answer"
+                  data-testid={ question}
+                >
+                  {question[counter].correct_answer}
+                </button>
+              ))} */}
               <button
                 onClick={ this.answerClick }
                 type="button"
@@ -71,7 +83,6 @@ const mapStateToProps = (state) => ({
 
 TriviaQuestions.propTypes = {
   apiData: PropTypes.arrayOf(Object).isRequired,
-  // history: PropTypes.shape().isRequired,
 };
 
 export default connect(mapStateToProps)(TriviaQuestions);
