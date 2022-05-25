@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 
@@ -9,6 +10,7 @@ class Header extends Component {
 
     this.state = {
       userImage: '',
+      redirect: false,
     };
   }
 
@@ -20,9 +22,16 @@ class Header extends Component {
     });
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.setState({
+      redirect: true,
+    });
+  }
+
   render() {
     const { playerHeaderName, playerHeaderScore } = this.props;
-    const { userImage } = this.state;
+    const { userImage, redirect } = this.state;
     return (
       <div>
         <header>
@@ -38,6 +47,18 @@ class Header extends Component {
             { playerHeaderScore }
           </p>
         </header>
+        <form>
+          <button
+            data-testid="btn-go-home"
+            id="btn-go-home"
+            type="submit"
+            onClick={ this.handleSubmit }
+          >
+            Home
+          </button>
+          { redirect && <Redirect to="/" /> }
+
+        </form>
       </div>
     );
   }

@@ -1,15 +1,20 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 import Header from '../components/Header';
 
-class Config extends React.Component {
+class Ranking extends React.Component {
   render() {
     return (
       <div>
         <Header />
-        <span data-testid="settings-title">Configurações</span>
+
       </div>
+
     );
   }
 }
+Ranking.propTypes = {
 
-export default Config;
+};
+
+export default Ranking;
