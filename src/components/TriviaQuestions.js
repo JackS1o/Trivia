@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class TriviaQuestions extends React.Component {
@@ -11,6 +12,7 @@ class TriviaQuestions extends React.Component {
       category: '',
       question: '',
       correct: '',
+      redirect: false,
     };
   }
 
@@ -19,7 +21,10 @@ class TriviaQuestions extends React.Component {
     const fetchQuestion = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const responseQuestions = await fetchQuestion.json();
     const { counter } = this.state;
-
+    const LAST_QUESTION = 5;
+    if (Number(counter) === Number(LAST_QUESTION)) {
+      this.setState({ redirect: true });
+    }
     const {
       category,
       question,
@@ -35,12 +40,13 @@ class TriviaQuestions extends React.Component {
   }
 
   answerClick = () => {
-    this.setState((prev) => ({ counter: prev.counter + 1 }));
+    this.setState((prev) => ({ counter: prev.counter + 1 }),
+      () => this.componentDidMount());
   }
 
   render() {
     const { apiData } = this.props;
-    const { category, question, answers, correct } = this.state;
+    const { category, question, answers, correct, redirect } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
       <section>
@@ -67,6 +73,14 @@ class TriviaQuestions extends React.Component {
                 </button>
               )).sort(() => Math.random() - RANDOMIZE_NUMBER)}
             </div>
+            <button
+              type="button"
+              onClick={ this.answerClick }
+              data-testid="btn-next"
+            >
+              Next
+            </button>
+            { redirect && <Redirect to="/feedback" /> }
           </div>)}
       </section>
     );
