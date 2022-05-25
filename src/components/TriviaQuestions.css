@@ -1,0 +1,13 @@
+.assert {
+  border: 3px solid rgb(6, 240, 15);
+  margin: 25px;
+}
+
+.error {
+  border: 3px solid red;
+  margin: 25px;
+}
+
+.margin {
+  display: flex;
+}

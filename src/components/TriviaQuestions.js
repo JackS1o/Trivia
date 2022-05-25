@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setScore } from '../redux/actions';
+import './TriviaQuestions.css';
 
 class TriviaQuestions extends React.Component {
   constructor() {
@@ -15,6 +16,8 @@ class TriviaQuestions extends React.Component {
       correct: '',
       redirect: false,
       score: 0,
+      color: 'null',
+      errorColor: 'null',
     };
   }
 
@@ -22,11 +25,12 @@ class TriviaQuestions extends React.Component {
     const token = localStorage.getItem('token');
     const fetchQuestion = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const responseQuestions = await fetchQuestion.json();
-    const { counter } = this.state;
     const LAST_QUESTION = 5;
+    const { counter } = this.state;
     if (Number(counter) === Number(LAST_QUESTION)) {
       this.setState({ redirect: true });
     }
+    this.setState({ color: 'null', errorColor: 'null' });
     const {
       category,
       question,
@@ -48,14 +52,20 @@ class TriviaQuestions extends React.Component {
 
   handleScore = () => {
     this.setState((prev) => ({ score: prev.score + 1 }));
-    const { asserts } = this.props;
     const { score } = this.state;
+    this.setState({ color: 'assert', errorColor: 'error' });
+    const { asserts } = this.props;
     asserts(score);
+  }
+
+  handleError= () => {
+    this.setState({ errorColor: 'error', color: 'assert' });
   }
 
   render() {
     const { apiData } = this.props;
-    const { category, question, answers, correct, redirect } = this.state;
+    const { category, question, answers, correct, redirect, color,
+      errorColor } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
       <section>
@@ -69,15 +79,16 @@ class TriviaQuestions extends React.Component {
 
             </h4>
             <p data-testid="question-text">{question}</p>
-            <div data-testid="answer-options">
+            <div data-testid="answer-options" className="margin">
               {answers.map((item, index) => (
                 <button
                   type="button"
                   key={ index }
+                  onClick={ this.handleScore }
+                  className={ correct === item ? color : errorColor }
                   data-testid={
                     correct === item ? 'correct-answer' : `wrong-answer-${index}`
                   }
-                  onClick={ correct === item ? this.handleScore : this.handleError }
                 >
                   { item }
                 </button>
