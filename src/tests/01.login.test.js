@@ -81,7 +81,7 @@ describe('Testes para a tela de login', () => {
     expect(btnPlay).not.toBeDisabled();
     userEvent.click(btnPlay);
     const { pathname } = history.location;
-    expect(pathname).toBe('/play');
+    expect(pathname).toBe('/');
   });
   test('Testa se ao clicar em "Configurações" é redirecionado para "/configuracoes"', () => {
     const { history } = renderWithRouterAndRedux(<App />);
