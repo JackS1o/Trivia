@@ -79,7 +79,7 @@ class TriviaQuestions extends React.Component {
 
             </h4>
             <p data-testid="question-text">{question}</p>
-            <div data-testid="answer-options" className="margin">
+            <div data-testid="answer-options">
               {answers.map((item, index) => (
                 <button
                   type="button"

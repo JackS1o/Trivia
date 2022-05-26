@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import './Header.css';
 import md5 from 'crypto-js/md5';
 
 class Header extends Component {
@@ -34,8 +33,8 @@ class Header extends Component {
     const { playerHeaderName, playerHeaderScore } = this.props;
     const { userImage, redirect } = this.state;
     return (
-      <div className="header">
-        <header className="header">
+      <div>
+        <header>
           <img
             src={ `https://www.gravatar.com/avatar/${userImage}` }
             alt={ playerHeaderName }
