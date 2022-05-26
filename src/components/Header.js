@@ -30,7 +30,7 @@ class Header extends Component {
   }
 
   render() {
-    const { playerHeaderName } = this.props;
+    const { playerHeaderName, playerHeaderScore } = this.props;
     const { userImage, redirect } = this.state;
     return (
       <div>
@@ -43,9 +43,9 @@ class Header extends Component {
           <h3 data-testid="header-player-name">
             { playerHeaderName }
           </h3>
-          {/* <p data-testid="header-score">
-            { playerHeaderScore + 1 }
-          </p> */}
+          <p data-testid="header-score">
+            { playerHeaderScore }
+          </p>
         </header>
         <form>
           <button
@@ -66,13 +66,13 @@ class Header extends Component {
 
 const mapStateToProps = (globalState) => ({
   playerHeaderName: globalState.player.name,
-  // playerHeaderScore: globalState.player.assertions,
+  playerHeaderScore: globalState.player.assertions,
   playerHeaderEmail: globalState.player.gravatarEmail,
 });
 
 Header.propTypes = {
   playerHeaderName: PropTypes.string.isRequired,
-  // playerHeaderScore: PropTypes.number.isRequired,
+  playerHeaderScore: PropTypes.number.isRequired,
   playerHeaderEmail: PropTypes.string.isRequired,
 };
 

@@ -42,7 +42,7 @@ class Feedback extends Component {
             {playerFinalsScore}
           </p>
           <p data-testid="feedback-total-question">
-            {playerTotalAssertions + 1}
+            { playerTotalAssertions }
           </p>
 
         </div>

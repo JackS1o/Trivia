@@ -10,7 +10,7 @@ class Countdown extends Component {
     super();
 
     this.state = {
-      secondsLeft: 10,
+      secondsLeft: 30,
     };
   }
 
@@ -24,17 +24,17 @@ class Countdown extends Component {
   componentDidUpdate() {
     const { secondsLeft } = this.state;
     const { isDisable, setTimerTrue, trueTimer } = this.props;
-    const SET_TIMER = 30;
-    if (setTimerTrue === true) {
+    // const SET_TIMER = 30;
+    if (isDisable === true) {
+      console.log('teste');
+    } else if (setTimerTrue === true) {
       this.resetTimer();
       trueTimer(false);
     }
-    if (secondsLeft < 1 || isDisable === true) {
+    if (secondsLeft > 0 && trueTimer === false) {
       console.log('teste');
-      this.resetTimer();
-      clearInterval(timerCounter);
-    } else if (secondsLeft === SET_TIMER) {
       this.handleTimer();
+      clearInterval(timerCounter);
     }
   }
 
@@ -53,10 +53,14 @@ class Countdown extends Component {
   }
 
   render() {
+    // const { isDisable } = this.props;
     const { secondsLeft } = this.state;
     return (
       <div>
+
         <span>{ secondsLeft }</span>
+
+        {/* <span>{ isDisable === false && { secondsLeft } }</span> */}
       </div>
     );
   }

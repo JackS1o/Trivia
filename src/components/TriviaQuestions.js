@@ -48,7 +48,7 @@ class TriviaQuestions extends React.Component {
       correct: correctAnswer,
       answers: [...incorrectAnswers, correctAnswer] });
 
-    setTimeout(() => this.handleScore(), SECONDS_COUNTDOWN); // https://felixgerschau.com/react-hooks-settimeout/
+    setTimeout(() => this.handleError(), SECONDS_COUNTDOWN); // https://felixgerschau.com/react-hooks-settimeout/
   }
 
   answerClick = () => {
@@ -59,9 +59,11 @@ class TriviaQuestions extends React.Component {
   }
 
   handleScore = () => {
-    const { score } = this.state;
     const { asserts } = this.props;
-    this.setState((prev) => ({ score: prev.score + 1 }), () => asserts(score));
+    this.setState((prev) => ({ score: prev.score + 1 }), () => {
+      const { score } = this.state;
+      asserts(score);
+    });
     this.setState({ color: 'assert', errorColor: 'error', isDisabled: true, next: 1 });
   }
 
@@ -72,11 +74,10 @@ class TriviaQuestions extends React.Component {
   render() {
     const { apiData } = this.props;
     const { category, question, answers, correct, redirect, color,
-      errorColor, isDisabled, next, score } = this.state;
+      errorColor, isDisabled, next } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
       <section>
-        <p data-testid="header-score">{ score }</p>
         { apiData
         && (
           <div>
@@ -86,7 +87,7 @@ class TriviaQuestions extends React.Component {
               {category}
 
             </h4>
-            <Countdown isDisabled={ isDisabled } />
+            { isDisabled === false && <Countdown isDisabled={ isDisabled } /> }
             <p data-testid="question-text">{question}</p>
             <div data-testid="answer-options">
               {answers.map((item, index) => (
