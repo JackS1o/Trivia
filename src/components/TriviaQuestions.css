@@ -1,0 +1,7 @@
+.assert {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.error {
+  border: 3px solid red;
+}
