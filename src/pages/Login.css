@@ -1,0 +1,108 @@
+.Login-container {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.Form-container {
+  background-color: white;
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  padding: 15px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+  padding: 5px;
+  width: 100%;
+}
+
+.Login-btn {
+  background-color: #285467;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 10px;
+  padding: 10px 0;
+  transition: 0.2s;
+}
+
+.Login-btn:disabled {
+  background-color: #282c34;
+  border: none;
+  border-radius: 5px;
+  color: #ccc;
+  pointer-events: none;
+}
+
+.Login-btn:hover {
+  transform: scale(1.05);
+}
+
+.Trivia-logo {
+  animation: myAnim 2s ease 0s infinite normal forwards;
+  height: 15vmin;
+  margin-bottom: 1.5rem;
+  pointer-events: none;
+}
+
+@keyframes myAnim {
+
+  0% {
+    transform: translate(0);
+  }
+
+  10% {
+    transform: translate(-2px, -2px);
+  }
+
+  20% {
+    transform: translate(2px, -2px);
+  }
+
+  30% {
+    transform: translate(-2px, 2px);
+  }
+
+  40% {
+    transform: translate(2px, 2px);
+  }
+
+  50% {
+    transform: translate(-2px, -2px);
+  }
+
+  60% {
+    transform: translate(2px, -2px);
+  }
+
+  70% {
+    transform: translate(-2px, 2px);
+  }
+
+  80% {
+    transform: translate(-2px, -2px);
+  }
+
+  90% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(0);
+  }
+}

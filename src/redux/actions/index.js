@@ -2,6 +2,7 @@ export const USER_LOGIN = 'USER_LOGIN';
 export const USER_TOKEN = 'USER_TOKEN';
 export const USER_SCORE = 'USER_SCORE';
 export const ERROR_TOKEN = 'ERROR_TOKEN';
+export const TRUE_TIMER = 'TRUE_TIMER';
 
 export const startPlay = (start) => ({
   type: USER_LOGIN,
@@ -16,6 +17,10 @@ export const setAPI = (token) => ({
 export const setScore = (score) => ({
   type: USER_SCORE,
   payload: score,
+});
+export const setTimer = (bool) => ({
+  type: TRUE_TIMER,
+  payload: bool,
 });
 
 export const fetchToken = () => async () => {

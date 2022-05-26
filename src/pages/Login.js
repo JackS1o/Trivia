@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchToken, startPlay } from '../redux/actions';
+import './Login.css';
+import TriviaLogo from '../trivia.png';
 
 class Login extends React.Component {
   constructor() {
@@ -46,46 +48,52 @@ class Login extends React.Component {
   render() {
     const { Username, email, isDisable } = this.state;
     return (
-      <div>
-        <form>
-          <label htmlFor="email">
-            Email:
-            <input
-              data-testid="input-gravatar-email"
-              id="email"
-              type="email"
-              name="email"
-              value={ email }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <label htmlFor="Username">
-            Nome:
-            <input
-              data-testid="input-player-name"
-              id="Username"
-              type="text"
-              name="Username"
-              value={ Username }
-              onChange={ this.handleChange }
-            />
-          </label>
-          <button
-            type="button"
-            data-testid="btn-play"
-            disabled={ isDisable }
-            onClick={ this.handleSubmit }
-          >
-            Play
-          </button>
-          <button
-            type="button"
-            data-testid="btn-settings"
-            onClick={ this.handleConfig }
-          >
-            Configurações
-          </button>
-        </form>
+      <div className="Login-container">
+
+        <div className="Form-container">
+          <img src={ TriviaLogo } alt="Logo" className="Trivia-logo" />
+          <form>
+            <label htmlFor="email">
+              Email:
+              <input
+                data-testid="input-gravatar-email"
+                id="email"
+                type="email"
+                name="email"
+                value={ email }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <label htmlFor="Username">
+              Nome:
+              <input
+                data-testid="input-player-name"
+                id="Username"
+                type="text"
+                name="Username"
+                value={ Username }
+                onChange={ this.handleChange }
+              />
+            </label>
+            <button
+              type="button"
+              data-testid="btn-play"
+              disabled={ isDisable }
+              onClick={ this.handleSubmit }
+              className="Login-btn"
+            >
+              Play
+            </button>
+            <button
+              type="button"
+              data-testid="btn-settings"
+              onClick={ this.handleConfig }
+              className="Login-btn"
+            >
+              Configurações
+            </button>
+          </form>
+        </div>
       </div>
     );
   }

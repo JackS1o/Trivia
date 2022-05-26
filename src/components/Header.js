@@ -66,7 +66,7 @@ class Header extends Component {
 
 const mapStateToProps = (globalState) => ({
   playerHeaderName: globalState.player.name,
-  playerHeaderScore: globalState.player.score,
+  playerHeaderScore: globalState.player.assertions,
   playerHeaderEmail: globalState.player.gravatarEmail,
 });
 
