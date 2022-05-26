@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setScore, setTimer } from '../redux/actions';
+import { setScore, setTimer, setAssertions } from '../redux/actions';
 import Countdown from './Countdown';
 import './TriviaQuestions.css';
 
@@ -21,6 +21,8 @@ class TriviaQuestions extends React.Component {
       color: 'null',
       errorColor: 'null',
       isDisabled: false,
+      difficulty: '',
+      assertions: 0,
     };
   }
 
@@ -38,14 +40,16 @@ class TriviaQuestions extends React.Component {
     const {
       category,
       question,
+      difficulty,
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
     } = responseQuestions.results[counter];
-
+    // console.log(difficulty);
     this.setState({
       category,
       question,
       correct: correctAnswer,
+      difficulty,
       answers: [...incorrectAnswers, correctAnswer] });
 
     setTimeout(() => this.handleError(), SECONDS_COUNTDOWN); // https://felixgerschau.com/react-hooks-settimeout/
@@ -53,17 +57,36 @@ class TriviaQuestions extends React.Component {
 
   answerClick = () => {
     const { trueTimer } = this.props;
+    // console.log(valueTimer);
     trueTimer(true);
     this.setState((prev) => ({ counter: prev.counter + 1, isDisabled: false }),
       () => this.componentDidMount());
   }
 
   handleScore = () => {
-    const { asserts } = this.props;
-    this.setState((prev) => ({ score: prev.score + 1 }), () => {
-      const { score } = this.state;
-      asserts(score);
+    const { setScoreValue, valueTimer, setAssertionsValue } = this.props;
+    // console.log(valueTimer);
+    const VALUE_TEN = 10;
+    const { score } = this.state;
+    let VALUE_SCORE = 0;
+    this.setState((prev) => ({ assertions: prev.assertions + 1 }), () => {
+      const { assertions } = this.state;
+      setAssertionsValue(assertions);
     });
+    const { difficulty } = this.state;
+    if (difficulty === 'easy') {
+      VALUE_SCORE = Number(score + VALUE_TEN + (valueTimer * 1));
+      this.setState(() => ({ score: VALUE_SCORE }));
+    }
+    if (difficulty === 'medium') {
+      VALUE_SCORE = Number(score + VALUE_TEN + (valueTimer * 2));
+      this.setState(() => ({ score: VALUE_SCORE }));
+    }
+    if (difficulty === 'hard') {
+      VALUE_SCORE = Number(score + VALUE_TEN + (valueTimer * (1 + 1 + 1)));
+      this.setState(() => ({ score: VALUE_SCORE }));
+    }
+    setScoreValue(VALUE_SCORE);
     this.setState({ color: 'assert', errorColor: 'error', isDisabled: true, next: 1 });
   }
 
@@ -123,17 +146,21 @@ class TriviaQuestions extends React.Component {
 
 const mapStateToProps = (state) => ({
   apiData: state.player.API,
+  valueTimer: state.player.valueTime,
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  asserts: (asserts) => dispatch(setScore(asserts)),
+  setScoreValue: (score) => dispatch(setScore(score)),
+  setAssertionsValue: (assertions) => dispatch(setAssertions(assertions)),
   trueTimer: (bool) => dispatch(setTimer(bool)),
 });
 
 TriviaQuestions.propTypes = {
   apiData: PropTypes.arrayOf(Object).isRequired,
-  asserts: PropTypes.func.isRequired,
+  setScoreValue: PropTypes.func.isRequired,
+  setAssertionsValue: PropTypes.func.isRequired,
   trueTimer: PropTypes.func.isRequired,
+  valueTimer: PropTypes.number.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TriviaQuestions);

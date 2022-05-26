@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setTimer } from '../redux/actions';
+import { setTimer, quantifyTimer } from '../redux/actions';
 
 let timerCounter;
 
@@ -23,16 +23,15 @@ class Countdown extends Component {
 
   componentDidUpdate() {
     const { secondsLeft } = this.state;
-    const { isDisable, setTimerTrue, trueTimer } = this.props;
-    // const SET_TIMER = 30;
-    if (isDisable === true) {
-      console.log('teste');
+    const { setTimerTrue, trueTimer, valueTimer } = this.props;
+    const SET_TIMER = 30;
+    if (secondsLeft < SET_TIMER) {
+      valueTimer(secondsLeft);
     } else if (setTimerTrue === true) {
       this.resetTimer();
       trueTimer(false);
     }
     if (secondsLeft > 0 && trueTimer === false) {
-      console.log('teste');
       this.handleTimer();
       clearInterval(timerCounter);
     }
@@ -45,22 +44,20 @@ class Countdown extends Component {
         secondsLeft: prevState.secondsLeft - 1,
       }));
     }, ONE_SECOND);
+    // const { valueTimer } = this.props;
+    // const { secondsLeft } = this.state;
+    // valueTimer(secondsLeft);
   }
 
   resetTimer = () => {
-    console.log('agora vai');
     this.setState({ secondsLeft: 30 });
   }
 
   render() {
-    // const { isDisable } = this.props;
     const { secondsLeft } = this.state;
     return (
       <div>
-
         <span>{ secondsLeft }</span>
-
-        {/* <span>{ isDisable === false && { secondsLeft } }</span> */}
       </div>
     );
   }
@@ -72,12 +69,14 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   trueTimer: (bool) => dispatch(setTimer(bool)),
+  valueTimer: (time) => dispatch(quantifyTimer(time)),
 });
 
 Countdown.propTypes = {
-  isDisable: PropTypes.bool.isRequired,
+  // isDisable: PropTypes.bool.isRequired,
   setTimerTrue: PropTypes.bool.isRequired,
   trueTimer: PropTypes.func.isRequired,
+  valueTimer: PropTypes.func.isRequired,
 };
 
 // quando a página montar, exibir o timer no estado inicial

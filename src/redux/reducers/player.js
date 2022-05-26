@@ -1,4 +1,5 @@
-import { USER_LOGIN, USER_SCORE, USER_TOKEN, TRUE_TIMER } from '../actions';
+import { USER_LOGIN, USER_SCORE, USER_TOKEN,
+  TRUE_TIMER, VALUE_TIMER, USER_ASSERTIONS } from '../actions';
 
 const INITIAL_STATE = {
   name: '',
@@ -6,6 +7,7 @@ const INITIAL_STATE = {
   score: 0,
   gravatarEmail: '',
   timer: false,
+  valueTime: 0,
 };
 
 const player = (state = INITIAL_STATE, action) => {
@@ -24,12 +26,22 @@ const player = (state = INITIAL_STATE, action) => {
   case USER_SCORE:
     return {
       ...state,
-      assertions: action.payload,
+      score: action.payload,
     };
   case TRUE_TIMER:
     return {
       ...state,
       timer: action.payload,
+    };
+  case VALUE_TIMER:
+    return {
+      ...state,
+      valueTime: action.payload,
+    };
+  case USER_ASSERTIONS:
+    return {
+      ...state,
+      assertions: action.payload,
     };
   default:
     return state;
