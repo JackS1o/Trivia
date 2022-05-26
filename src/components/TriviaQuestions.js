@@ -12,6 +12,7 @@ class TriviaQuestions extends React.Component {
     this.state = {
       counter: 0,
       answers: [],
+      next: 0,
       category: '',
       question: '',
       correct: '',
@@ -58,19 +59,19 @@ class TriviaQuestions extends React.Component {
   handleScore = () => {
     this.setState((prev) => ({ score: prev.score + 1 }));
     const { score } = this.state;
-    this.setState({ color: 'assert', errorColor: 'error', isDisabled: true });
+    this.setState({ color: 'assert', errorColor: 'error', isDisabled: true, next: 1 });
     const { asserts } = this.props;
     asserts(score);
   }
 
-  /*   handleError= () => {
-    this.setState({ errorColor: 'error', color: 'assert', isDisabled: true });
-  } */
+  handleError= () => {
+    this.setState({ errorColor: 'error', color: 'assert', isDisabled: true, next: 1 });
+  }
 
   render() {
     const { apiData } = this.props;
     const { category, question, answers, correct, redirect, color,
-      errorColor, isDisabled } = this.state;
+      errorColor, isDisabled, next } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
       <section>
@@ -91,7 +92,7 @@ class TriviaQuestions extends React.Component {
                   type="button"
                   disabled={ isDisabled }
                   key={ index }
-                  onClick={ this.handleScore }
+                  onClick={ correct === item ? this.handleScore : this.handleError }
                   className={ correct === item ? color : errorColor }
                   data-testid={
                     correct === item ? 'correct-answer' : `wrong-answer-${index}`
@@ -101,13 +102,15 @@ class TriviaQuestions extends React.Component {
                 </button>
               )).sort(() => Math.random() - RANDOMIZE_NUMBER)}
             </div>
-            <button
-              type="button"
-              onClick={ this.answerClick }
-              data-testid="btn-next"
-            >
-              Next
-            </button>
+            { next !== 0 && (
+              <button
+                type="button"
+                onClick={ this.answerClick }
+                data-testid="btn-next"
+              >
+                Next
+              </button>
+            )}
             { redirect && <Redirect to="/feedback" /> }
           </div>)}
       </section>
