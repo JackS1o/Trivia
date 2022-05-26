@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { setScore } from '../redux/actions';
+import { setScore, setTimer } from '../redux/actions';
 import Countdown from './Countdown';
 import './TriviaQuestions.css';
 
@@ -52,16 +52,17 @@ class TriviaQuestions extends React.Component {
   }
 
   answerClick = () => {
+    const { trueTimer } = this.props;
+    trueTimer(true);
     this.setState((prev) => ({ counter: prev.counter + 1, isDisabled: false }),
       () => this.componentDidMount());
   }
 
   handleScore = () => {
-    this.setState((prev) => ({ score: prev.score + 1 }));
     const { score } = this.state;
-    this.setState({ color: 'assert', errorColor: 'error', isDisabled: true, next: 1 });
     const { asserts } = this.props;
-    asserts(score);
+    this.setState((prev) => ({ score: prev.score + 1 }), () => asserts(score));
+    this.setState({ color: 'assert', errorColor: 'error', isDisabled: true, next: 1 });
   }
 
   handleError= () => {
@@ -71,10 +72,11 @@ class TriviaQuestions extends React.Component {
   render() {
     const { apiData } = this.props;
     const { category, question, answers, correct, redirect, color,
-      errorColor, isDisabled, next } = this.state;
+      errorColor, isDisabled, next, score } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
       <section>
+        <p data-testid="header-score">{ score }</p>
         { apiData
         && (
           <div>
@@ -124,11 +126,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   asserts: (asserts) => dispatch(setScore(asserts)),
+  trueTimer: (bool) => dispatch(setTimer(bool)),
 });
 
 TriviaQuestions.propTypes = {
   apiData: PropTypes.arrayOf(Object).isRequired,
   asserts: PropTypes.func.isRequired,
+  trueTimer: PropTypes.func.isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TriviaQuestions);
