@@ -13,6 +13,11 @@ class Feedback extends Component {
     };
   }
 
+  handleClickToLogin = () => {
+    const { history } = this.props;
+    history.push('/');
+  }
+
   handleSubmit = (event) => {
     event.preventDefault();
     this.setState({
@@ -41,6 +46,15 @@ class Feedback extends Component {
           </p>
 
         </div>
+
+        <button
+          data-testid="btn-play-again"
+          type="button"
+          onClick={ this.handleClickToLogin }
+        >
+          Play Again
+        </button>
+
         <button
           data-testid="btn-ranking"
           type="submit"
@@ -62,6 +76,7 @@ const mapStateToProps = (globalState) => ({
 Feedback.propTypes = {
   playerTotalAssertions: PropTypes.number.isRequired,
   playerFinalsScore: PropTypes.number.isRequired,
+  history: PropTypes.shape({ push: PropTypes.func }).isRequired,
 };
 
 export default connect(mapStateToProps)(Feedback);
