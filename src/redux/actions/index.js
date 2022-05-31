@@ -5,6 +5,7 @@ export const USER_ASSERTIONS = 'USER_ASSERTIONS';
 export const ERROR_TOKEN = 'ERROR_TOKEN';
 export const TRUE_TIMER = 'TRUE_TIMER';
 export const VALUE_TIMER = 'VALUE_TIMER';
+export const RESET_SCORE = 'RESET_SCORE';
 
 export const startPlay = (start) => ({
   type: USER_LOGIN,
@@ -32,6 +33,11 @@ export const setTimer = (bool) => ({
 export const quantifyTimer = (time) => ({
   type: VALUE_TIMER,
   payload: time,
+});
+
+export const resetScore = (reset) => ({
+  type: RESET_SCORE,
+  reset,
 });
 
 export const fetchToken = () => async () => {

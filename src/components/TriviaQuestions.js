@@ -23,6 +23,7 @@ class TriviaQuestions extends React.Component {
       isDisabled: false,
       difficulty: '',
       assertions: 0,
+      api: [],
     };
   }
 
@@ -30,37 +31,44 @@ class TriviaQuestions extends React.Component {
     const token = localStorage.getItem('token');
     const fetchQuestion = await fetch(`https://opentdb.com/api.php?amount=5&token=${token}`);
     const responseQuestions = await fetchQuestion.json();
-    const LAST_QUESTION = 5;
+    this.setState({ api: responseQuestions });
     const SECONDS_COUNTDOWN = 31000;
-    const { counter } = this.state;
-    if (Number(counter) === Number(LAST_QUESTION)) {
-      this.setState({ redirect: true });
-    }
-    this.setState({ color: 'null', errorColor: 'null' });
+    this.updateQuestions();
+    setTimeout(() => this.handleError(), SECONDS_COUNTDOWN); // https://felixgerschau.com/react-hooks-settimeout/
+  }
+
+  updateQuestions = () => {
+    const { counter, api } = this.state;
     const {
       category,
       question,
       difficulty,
       correct_answer: correctAnswer,
       incorrect_answers: incorrectAnswers,
-    } = responseQuestions.results[counter];
-    // console.log(difficulty);
+    } = api.results[counter];
     this.setState({
       category,
       question,
       correct: correctAnswer,
       difficulty,
       answers: [...incorrectAnswers, correctAnswer] });
-
-    setTimeout(() => this.handleError(), SECONDS_COUNTDOWN); // https://felixgerschau.com/react-hooks-settimeout/
   }
 
   answerClick = () => {
     const { trueTimer } = this.props;
-    // console.log(valueTimer);
     trueTimer(true);
-    this.setState((prev) => ({ counter: prev.counter + 1, isDisabled: false }),
-      () => this.componentDidMount());
+    const { counter } = this.state;
+    const LAST_QUESTION = 4;
+    if (counter >= LAST_QUESTION) {
+      this.setState({ redirect: true });
+    }
+    this.setState((prev) => ({ counter: prev.counter + 1, isDisabled: false }), () => {
+      if (counter < LAST_QUESTION) {
+        this.updateQuestions();
+      }
+    });
+
+    this.setState({ color: 'null', errorColor: 'null' });
   }
 
   handleScore = () => {
@@ -147,6 +155,10 @@ class TriviaQuestions extends React.Component {
 const mapStateToProps = (state) => ({
   apiData: state.player.API,
   valueTimer: state.player.valueTime,
+  playerName: state.player.name,
+  playerScore: state.player.score,
+  playerGravatar: state.player.gravatarEmail,
+
 });
 
 const mapDispatchToProps = (dispatch) => ({
