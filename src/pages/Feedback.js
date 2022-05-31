@@ -3,26 +3,47 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Header from '../components/Header';
+import { resetScore } from '../redux/actions';
 
 class Feedback extends Component {
   constructor() {
     super();
-
     this.state = {
       redirect: false,
+      ranking: [],
     };
   }
 
+  componentDidMount() {
+    const ranking = JSON.parse(localStorage.getItem('playerRanking')) || [];
+    this.setState({ ranking });
+    console.log(ranking);
+  }
+
   handleClickToLogin = () => {
-    const { history } = this.props;
+    const { history, resetAll } = this.props;
     history.push('/');
+    resetAll();
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const { resetAll, playerName, playerFinalsScore, playerGravatar } = this.props;
+    const { ranking } = this.state;
+    const obj = {
+      playerName,
+      playerFinalsScore,
+      playerGravatar,
+    };
+    this.setState({ ranking: [...ranking, obj] }, () => {
+      const { ranking: newRanking } = this.state;
+      localStorage.setItem('playerRanking', JSON.stringify(newRanking));
+    });
+
     this.setState({
       redirect: true,
     });
+    resetAll();
   }
 
   render() {
@@ -68,15 +89,24 @@ class Feedback extends Component {
   }
 }
 
+const mapDispatchToProps = (dispatch) => ({
+  resetAll: () => (dispatch(resetScore())),
+});
+
 const mapStateToProps = (globalState) => ({
   playerTotalAssertions: globalState.player.assertions,
   playerFinalsScore: globalState.player.score,
+  playerName: globalState.player.name,
+  playerGravatar: globalState.player.gravatarEmail,
 });
 
 Feedback.propTypes = {
   playerTotalAssertions: PropTypes.number.isRequired,
   playerFinalsScore: PropTypes.number.isRequired,
   history: PropTypes.shape({ push: PropTypes.func }).isRequired,
+  resetAll: PropTypes.func.isRequired,
+  playerName: PropTypes.string.isRequired,
+  playerGravatar: PropTypes.string.isRequired,
 };
 
-export default connect(mapStateToProps)(Feedback);
+export default connect(mapStateToProps, mapDispatchToProps)(Feedback);
