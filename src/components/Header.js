@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
+import { AiOutlineHome } from 'react-icons/ai';
 
 class Header extends Component {
   constructor() {
@@ -33,27 +34,30 @@ class Header extends Component {
     const { playerHeaderName, playerHeaderScore } = this.props;
     const { userImage, redirect } = this.state;
     return (
-      <div>
+      <div className="div-header">
         <header>
           <img
             src={ `https://www.gravatar.com/avatar/${userImage}` }
             alt={ playerHeaderName }
             data-testid="header-profile-picture"
           />
-          <h3 data-testid="header-player-name">
+          <h3 className="question" data-testid="header-player-name">
             { playerHeaderName }
           </h3>
-          <p data-testid="header-score">
+          <p className="question" data-testid="header-score">
             { playerHeaderScore }
           </p>
         </header>
         <form>
           <button
+            className="home-btn"
             data-testid="btn-go-home"
             id="btn-go-home"
             type="submit"
             onClick={ this.handleSubmit }
           >
+            <AiOutlineHome />
+            <br />
             Home
           </button>
           { redirect && <Redirect to="/" /> }

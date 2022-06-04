@@ -1,0 +1,84 @@
+body {
+  overflow: hidden;
+}
+
+.main-div {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.game {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-evenly;
+  width: 500px;
+}
+
+.div-header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+img {
+  border-radius: 50%;
+  height: 60px;
+}
+
+.home-btn {
+  background-color: #285467;
+  border: 0;
+  border-radius: 5px;
+  color: white;
+}
+
+.home-btn:hover {
+  background-color: #1b89b8;
+  color: white;
+}
+
+.question {
+  text-align: center;
+}
+
+.section-game {
+  align-items: center;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+}
+
+.div-trivia {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  justify-content: center;
+  width: 500px;
+}
+
+.options {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+/* .divload {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+} */

@@ -17,7 +17,6 @@ class Feedback extends Component {
   componentDidMount() {
     const ranking = JSON.parse(localStorage.getItem('playerRanking')) || [];
     this.setState({ ranking });
-    console.log(ranking);
   }
 
   handleClickToLogin = () => {
