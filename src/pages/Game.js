@@ -5,7 +5,6 @@ import { Redirect } from 'react-router-dom';
 import { fetchQuestions } from '../redux/actions';
 import Header from '../components/Header';
 import TriviaQuestions from '../components/TriviaQuestions';
-import TriviaLogo from '../trivia.png';
 
 class Game extends React.Component {
   constructor() {
@@ -40,7 +39,6 @@ class Game extends React.Component {
     return (
       <div className="main-div">
         <div className="game">
-          <img src={ TriviaLogo } alt="Logo" className="Trivia-logo" />
           <Header />
           { redirect ? <Redirect to="/" />
             : (<TriviaQuestions />)}

@@ -113,6 +113,7 @@ class TriviaQuestions extends React.Component {
         && (
           <div className="div-trivia">
             <h3
+              className="category"
               data-testid="question-category"
             >
               {category}
@@ -121,7 +122,7 @@ class TriviaQuestions extends React.Component {
             { isDisabled === false && <Countdown isDisabled={ isDisabled } /> }
             <p className="question" data-testid="question-text">{question}</p>
             <div
-              className="options"
+              className="options divload"
               data-testid="answer-options"
             >
               {answers.map((item, index) => (
@@ -144,6 +145,7 @@ class TriviaQuestions extends React.Component {
             </div>
             { next !== 0 && (
               <button
+                className="next-btn"
                 type="button"
                 onClick={ this.answerClick }
                 data-testid="btn-next"

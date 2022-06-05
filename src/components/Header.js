@@ -37,6 +37,7 @@ class Header extends Component {
       <div className="div-header">
         <header>
           <img
+            className="userImg"
             src={ `https://www.gravatar.com/avatar/${userImage}` }
             alt={ playerHeaderName }
             data-testid="header-profile-picture"

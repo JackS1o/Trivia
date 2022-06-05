@@ -50,39 +50,41 @@ class Feedback extends Component {
     const ASSERTIONS_NUMBER = 3;
     const { redirect } = this.state;
     return (
-      <div>
-        <Header />
-        <div data-testid="feedback-text">
-          {(playerTotalAssertions >= ASSERTIONS_NUMBER
-            ? <h2>Well Done!</h2>
-            : <h2>Could be better...</h2>)}
+      <div className="main-div-feedback">
+        <div className="div-feedback">
+          <Header />
+          <div data-testid="feedback-text">
+            {(playerTotalAssertions >= ASSERTIONS_NUMBER
+              ? <h2>Well Done!</h2>
+              : <h2>Could be better...</h2>)}
+          </div>
+          <div>
+            <p data-testid="feedback-total-score">
+              {playerFinalsScore}
+            </p>
+            <p data-testid="feedback-total-question">
+              { playerTotalAssertions }
+            </p>
+
+          </div>
+
+          <button
+            data-testid="btn-play-again"
+            type="button"
+            onClick={ this.handleClickToLogin }
+          >
+            Play Again
+          </button>
+
+          <button
+            data-testid="btn-ranking"
+            type="submit"
+            onClick={ this.handleSubmit }
+          >
+            Ranking
+          </button>
+          { redirect && <Redirect to="/ranking" /> }
         </div>
-        <div>
-          <p data-testid="feedback-total-score">
-            {playerFinalsScore}
-          </p>
-          <p data-testid="feedback-total-question">
-            { playerTotalAssertions }
-          </p>
-
-        </div>
-
-        <button
-          data-testid="btn-play-again"
-          type="button"
-          onClick={ this.handleClickToLogin }
-        >
-          Play Again
-        </button>
-
-        <button
-          data-testid="btn-ranking"
-          type="submit"
-          onClick={ this.handleSubmit }
-        >
-          Ranking
-        </button>
-        { redirect && <Redirect to="/ranking" /> }
       </div>
     );
   }
