@@ -95,6 +95,68 @@ body {
   font-weight: 700;
 }
 
+.playAgain-btn {
+  background-color: rgba(52, 133, 52, 0.856);
+  border: 1px solid rgba(52, 133, 52, 0.856);
+  border-radius: 7px;
+  color: white;
+  display: inline-block;
+  font-weight: 700;
+  height: 40px;
+  position: relative;
+  transition: color 1s;
+  width: 100px;
+}
+
+.playAgain-btn:hover {
+  color: black;
+}
+
+.playAgain-btn:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: 1s;
+  width: 0;
+}
+
+.playAgain-btn:hover:before {
+  width: 150%;
+}
+
+.ranking-btn {
+  background-color: gold;
+  border: 1px solid gold;
+  border-radius: 7px;
+  color: rgba(0, 0, 0, 0.562);
+  display: inline-block;
+  font-weight: 700;
+  height: 40px;
+  position: relative;
+  transition: color 1s;
+  width: 100px;
+}
+
+.ranking-btn:hover {
+  color: black;
+}
+
+.ranking-btn:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: 1s;
+  width: 0;
+}
+
+.ranking-btn:hover:before {
+  width: 150%;
+}
+
 /* .divload {
   animation: spin 1s linear infinite;
 }

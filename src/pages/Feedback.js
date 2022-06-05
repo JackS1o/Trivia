@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { BsController } from 'react-icons/bs';
+import { GiRank3 } from 'react-icons/gi';
 import Header from '../components/Header';
 import { resetScore } from '../redux/actions';
 
@@ -69,19 +71,25 @@ class Feedback extends Component {
           </div>
 
           <button
+            className="playAgain-btn"
             data-testid="btn-play-again"
             type="button"
             onClick={ this.handleClickToLogin }
           >
+            <BsController />
+            <br />
             Play Again
           </button>
 
           <button
+            className="ranking-btn"
             data-testid="btn-ranking"
             type="submit"
             onClick={ this.handleSubmit }
           >
+            <GiRank3 />
             Ranking
+            <GiRank3 />
           </button>
           { redirect && <Redirect to="/ranking" /> }
         </div>
