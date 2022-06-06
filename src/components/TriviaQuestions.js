@@ -129,10 +129,10 @@ class TriviaQuestions extends React.Component {
                 <button
                   style={
                     { width: 200,
-                      height: 40,
+                      height: 35,
                       backgroundColor: 'white',
                       borderRadius: 10,
-                      marginBottom: 10,
+                      marginBottom: 5,
                       fontWeight: 700 }
                   }
                   type="button"
