@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { BsController } from 'react-icons/bs';
+import { GiRank3 } from 'react-icons/gi';
 import Header from '../components/Header';
 import { resetScore } from '../redux/actions';
 
@@ -17,7 +19,6 @@ class Feedback extends Component {
   componentDidMount() {
     const ranking = JSON.parse(localStorage.getItem('playerRanking')) || [];
     this.setState({ ranking });
-    console.log(ranking);
   }
 
   handleClickToLogin = () => {
@@ -51,39 +52,47 @@ class Feedback extends Component {
     const ASSERTIONS_NUMBER = 3;
     const { redirect } = this.state;
     return (
-      <div>
-        <Header />
-        <div data-testid="feedback-text">
-          {(playerTotalAssertions >= ASSERTIONS_NUMBER
-            ? <h2>Well Done!</h2>
-            : <h2>Could be better...</h2>)}
+      <div className="main-div-feedback">
+        <div className="div-feedback">
+          <Header />
+          <div data-testid="feedback-text">
+            {(playerTotalAssertions >= ASSERTIONS_NUMBER
+              ? <h2>Well Done!</h2>
+              : <h2>Could be better...</h2>)}
+          </div>
+          <div>
+            <p data-testid="feedback-total-score">
+              {playerFinalsScore}
+            </p>
+            <p data-testid="feedback-total-question">
+              { playerTotalAssertions }
+            </p>
+
+          </div>
+
+          <button
+            className="playAgain-btn"
+            data-testid="btn-play-again"
+            type="button"
+            onClick={ this.handleClickToLogin }
+          >
+            <BsController />
+            <br />
+            Play Again
+          </button>
+
+          <button
+            className="ranking-btn"
+            data-testid="btn-ranking"
+            type="submit"
+            onClick={ this.handleSubmit }
+          >
+            <GiRank3 />
+            Ranking
+            <GiRank3 />
+          </button>
+          { redirect && <Redirect to="/ranking" /> }
         </div>
-        <div>
-          <p data-testid="feedback-total-score">
-            {playerFinalsScore}
-          </p>
-          <p data-testid="feedback-total-question">
-            { playerTotalAssertions }
-          </p>
-
-        </div>
-
-        <button
-          data-testid="btn-play-again"
-          type="button"
-          onClick={ this.handleClickToLogin }
-        >
-          Play Again
-        </button>
-
-        <button
-          data-testid="btn-ranking"
-          type="submit"
-          onClick={ this.handleSubmit }
-        >
-          Ranking
-        </button>
-        { redirect && <Redirect to="/ranking" /> }
       </div>
     );
   }

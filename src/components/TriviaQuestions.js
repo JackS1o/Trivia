@@ -108,21 +108,33 @@ class TriviaQuestions extends React.Component {
       errorColor, isDisabled, next } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
-      <section>
+      <section className="section-game">
         { apiData
         && (
-          <div>
-            <h4
+          <div className="div-trivia">
+            <h3
+              className="category"
               data-testid="question-category"
             >
               {category}
 
-            </h4>
+            </h3>
             { isDisabled === false && <Countdown isDisabled={ isDisabled } /> }
-            <p data-testid="question-text">{question}</p>
-            <div data-testid="answer-options">
+            <p className="question" data-testid="question-text">{question}</p>
+            <div
+              className="options divload"
+              data-testid="answer-options"
+            >
               {answers.map((item, index) => (
                 <button
+                  style={
+                    { width: 200,
+                      height: 30,
+                      backgroundColor: 'white',
+                      borderRadius: 10,
+                      marginBottom: 5,
+                      fontWeight: 700 }
+                  }
                   type="button"
                   disabled={ isDisabled }
                   key={ index }
@@ -138,6 +150,7 @@ class TriviaQuestions extends React.Component {
             </div>
             { next !== 0 && (
               <button
+                className="next-btn"
                 type="button"
                 onClick={ this.answerClick }
                 data-testid="btn-next"
