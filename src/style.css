@@ -2,7 +2,7 @@ body {
   overflow: hidden;
 }
 
-.main-div, .main-div-feedback {
+.main-div, .main-div-feedback, .main-div-ranking {
   align-items: center;
   background-color: #282c34;
   display: flex;
@@ -11,7 +11,7 @@ body {
   min-height: 100vh;
 }
 
-.game, .div-feedback {
+.game, .div-feedback, .div-ranking {
   align-items: center;
   background-color: white;
   border-radius: 10px;
@@ -128,7 +128,7 @@ body {
 
 .ranking-btn {
   background-color: gold;
-  border: 1px solid gold;
+  border: 1px solid black;
   border-radius: 7px;
   color: rgba(0, 0, 0, 0.562);
   display: inline-block;
@@ -155,6 +155,10 @@ body {
 
 .ranking-btn:hover:before {
   width: 150%;
+}
+
+.placar {
+  text-align: center;
 }
 
 /* .divload {
