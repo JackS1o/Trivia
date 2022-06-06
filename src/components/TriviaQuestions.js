@@ -128,7 +128,12 @@ class TriviaQuestions extends React.Component {
               {answers.map((item, index) => (
                 <button
                   style={
-                    { width: 200, height: 30, backgroundColor: 'white', borderRadius: 10 }
+                    { width: 200,
+                      height: 40,
+                      backgroundColor: 'white',
+                      borderRadius: 10,
+                      marginBottom: 10,
+                      fontWeight: 700 }
                   }
                   type="button"
                   disabled={ isDisabled }
