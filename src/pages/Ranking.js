@@ -9,25 +9,23 @@ class Ranking extends React.Component {
     const localOrder = local.sort((a, b) => b.playerFinalsScore - a.playerFinalsScore);
     const { history } = this.props;
     return (
-      <div className="main_div"> 
+      <div className="main_div">
         <div className={ style.main_div_ranking }>
           <div className={ style.div_ranking }>
-            <div className={ style.feedback_header }>
-              <button
-                className={ style.home_btn }
-                data-testid="btn-go-home"
-                id="btn-go-home"
-                type="submit"
-                onClick={ () => history.push('/') }
-              >
-                <AiOutlineHome />
-                <br />
-                Home
-              </button>
-              <h1 data-testid="ranking-title">
-                <strong>Ranking</strong>
-              </h1>
-            </div>
+            <button
+              className={ style.home_btn }
+              data-testid="btn-go-home"
+              id="btn-go-home"
+              type="submit"
+              onClick={ () => history.push('/') }
+            >
+              <AiOutlineHome />
+              <br />
+              Home
+            </button>
+            <h1 data-testid="ranking-title">
+              <strong>Ranking</strong>
+            </h1>
             {localOrder.map((ranking, index) => (
               <div
                 className={ style.placar }
