@@ -1,0 +1,55 @@
+.main_div_feedback {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.div_feedback {
+  align-content: center;
+  background-color: white;
+  border-radius: 0 0 10px 10px;
+  display: flex;
+  flex-flow: column wrap;
+  height: 429px;
+  justify-content: center;
+  line-height: 1.7;
+  text-align: center;
+  width: 500px;
+}
+
+.playAgain_btn {
+  background-color: rgba(52, 133, 52, 0.856);
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-weight: 700;
+  height: 40px;
+  margin: 10px;
+  transition: 0.5s;
+}
+
+.playAgain_btn:hover {
+  background-color: rgba(29, 73, 29, 0.856);
+  cursor: pointer;
+  transform: scale(1.07);
+}
+
+.ranking_btn {
+  background-color: gold;
+  border: none;
+  border-radius: 7px;
+  color: black;
+  font-weight: 700;
+  height: 40px;
+  margin: 10px;
+  transition: 0.5s;
+}
+
+.ranking_btn:hover {
+  background-color: rgb(238, 202, 0);
+  cursor: pointer;
+  transform: scale(1.07);
+}

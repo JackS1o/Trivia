@@ -1,0 +1,46 @@
+.main_div_ranking {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.div_ranking {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  height: 500px;
+  width: 500px;
+}
+
+.feedback_header {
+  text-align: center;
+  width: 500px;
+}
+
+.home_btn {
+  background-color: #285467;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+  height: 50px;
+  margin-bottom: 10px;
+  transition: 0.2s;
+  width: 100%;
+}
+
+.home_btn:hover {
+  background-color: #387d9b;
+  box-shadow: 0 10px 13px -7px black;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.placar {
+  text-align: center;
+}

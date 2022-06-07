@@ -37,7 +37,7 @@ class Game extends React.Component {
   render() {
     const { redirect } = this.state;
     return (
-      <div className="main-div">
+      <div className="main_div">
         <div className="game">
           <Header />
           { redirect ? <Redirect to="/" />

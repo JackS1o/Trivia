@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { setScore, setTimer, setAssertions } from '../redux/actions';
 import Countdown from './Countdown';
-import './TriviaQuestions.css';
+import style from './TriviaQuestions.module.css';
 
 class TriviaQuestions extends React.Component {
   constructor() {
@@ -95,11 +95,21 @@ class TriviaQuestions extends React.Component {
       this.setState(() => ({ score: VALUE_SCORE }));
     }
     setScoreValue(VALUE_SCORE);
-    this.setState({ color: 'assert', errorColor: 'error', isDisabled: true, next: 1 });
+    this.setState({
+      color: `${style.assert}`,
+      errorColor: `${style.error}`,
+      isDisabled: true,
+      next: 1,
+    });
   }
 
   handleError= () => {
-    this.setState({ errorColor: 'error', color: 'assert', isDisabled: true, next: 1 });
+    this.setState({
+      errorColor: `${style.error}`,
+      color: `${style.assert}`,
+      isDisabled: true,
+      next: 1,
+    });
   }
 
   render() {
@@ -108,33 +118,33 @@ class TriviaQuestions extends React.Component {
       errorColor, isDisabled, next } = this.state;
     const RANDOMIZE_NUMBER = 0.5;
     return (
-      <section className="section-game">
+      <section className={ style.section_game }>
         { apiData
         && (
-          <div className="div-trivia">
+          <div className={ style.div_trivia }>
             <h3
-              className="category"
+              className={ style.category }
               data-testid="question-category"
             >
               {category}
 
             </h3>
             { isDisabled === false && <Countdown isDisabled={ isDisabled } /> }
-            <p className="question" data-testid="question-text">{question}</p>
+            <p className={ style.question } data-testid="question-text">{question}</p>
             <div
-              className="options divload"
+              className={ `${style.options} ${style.answers_btn}` }
               data-testid="answer-options"
             >
               {answers.map((item, index) => (
                 <button
-                  style={
-                    { width: 200,
-                      height: 30,
-                      backgroundColor: 'white',
-                      borderRadius: 10,
-                      marginBottom: 5,
-                      fontWeight: 700 }
-                  }
+                  // style={
+                  //   { width: 300,
+                  //     height: 30,
+                  //     backgroundColor: 'white',
+                  //     borderRadius: 10,
+                  //     marginBottom: 5,
+                  //     fontWeight: 700 }
+                  // }
                   type="button"
                   disabled={ isDisabled }
                   key={ index }
@@ -150,7 +160,7 @@ class TriviaQuestions extends React.Component {
             </div>
             { next !== 0 && (
               <button
-                className="next-btn"
+                className={ style.next_btn }
                 type="button"
                 onClick={ this.answerClick }
                 data-testid="btn-next"

@@ -1,8 +1,27 @@
-body {
+/* body {
   overflow: hidden;
+} */
+
+.main_div {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
 }
 
-.main-div, .main-div-feedback, .main-div-ranking {
+.game {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 500px;
+}
+
+/*
+.main_div, .main-div-feedback, .main-div-ranking {
   align-items: center;
   background-color: #282c34;
   display: flex;
@@ -26,7 +45,7 @@ body {
   align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .userImg {
@@ -159,7 +178,7 @@ body {
 
 .placar {
   text-align: center;
-}
+} */
 
 /* .divload {
   animation: spin 1s linear infinite;
