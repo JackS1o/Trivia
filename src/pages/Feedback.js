@@ -6,6 +6,7 @@ import { BsController } from 'react-icons/bs';
 import { GiRank3 } from 'react-icons/gi';
 import Header from '../components/Header';
 import { resetScore } from '../redux/actions';
+import style from './Feedback.module.css';
 
 class Feedback extends Component {
   constructor() {
@@ -52,46 +53,48 @@ class Feedback extends Component {
     const ASSERTIONS_NUMBER = 3;
     const { redirect } = this.state;
     return (
-      <div className="main-div-feedback">
-        <div className="div-feedback">
+      <div className="main_div">
+        <div>
           <Header />
-          <div data-testid="feedback-text">
-            {(playerTotalAssertions >= ASSERTIONS_NUMBER
-              ? <h2>Well Done!</h2>
-              : <h2>Could be better...</h2>)}
+          <div className={ style.div_feedback }>
+            <div data-testid="feedback-text">
+              {(playerTotalAssertions >= ASSERTIONS_NUMBER
+                ? <h2>Well Done!</h2>
+                : <h2>Could be better...</h2>)}
+            </div>
+            <div>
+              <p data-testid="feedback-total-score">
+                {playerFinalsScore}
+              </p>
+              <p data-testid="feedback-total-question">
+                { playerTotalAssertions }
+              </p>
+
+            </div>
+
+            <button
+              className={ style.playAgain_btn }
+              data-testid="btn-play-again"
+              type="button"
+              onClick={ this.handleClickToLogin }
+            >
+              <BsController />
+              <br />
+              Play Again
+            </button>
+
+            <button
+              className={ style.ranking_btn }
+              data-testid="btn-ranking"
+              type="submit"
+              onClick={ this.handleSubmit }
+            >
+              <GiRank3 />
+              Ranking
+              <GiRank3 />
+            </button>
+            { redirect && <Redirect to="/ranking" /> }
           </div>
-          <div>
-            <p data-testid="feedback-total-score">
-              {playerFinalsScore}
-            </p>
-            <p data-testid="feedback-total-question">
-              { playerTotalAssertions }
-            </p>
-
-          </div>
-
-          <button
-            className="playAgain-btn"
-            data-testid="btn-play-again"
-            type="button"
-            onClick={ this.handleClickToLogin }
-          >
-            <BsController />
-            <br />
-            Play Again
-          </button>
-
-          <button
-            className="ranking-btn"
-            data-testid="btn-ranking"
-            type="submit"
-            onClick={ this.handleSubmit }
-          >
-            <GiRank3 />
-            Ranking
-            <GiRank3 />
-          </button>
-          { redirect && <Redirect to="/ranking" /> }
         </div>
       </div>
     );

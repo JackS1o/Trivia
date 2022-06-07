@@ -1,0 +1,33 @@
+.div_header {
+  align-items: center;
+  background-color: #364054;
+  border-radius: 9px 9px 0 0;
+  box-shadow: 1px 8px 9px -1px rgba(40, 44, 52, 0.51);
+  color: white;
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-around;
+  padding: 5px;
+}
+
+.userImg {
+  border-radius: 50%;
+  height: 45px;
+  margin: 5px 0;
+}
+
+.home_btn {
+  background-color: #285467;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  margin: 5px 0;
+  padding: 10px;
+  transition: 0.2s;
+}
+
+.home_btn:hover {
+  background-color: #282c34;
+  cursor: pointer;
+  transform: scale(1.07);
+}

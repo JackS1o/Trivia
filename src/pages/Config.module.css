@@ -1,0 +1,9 @@
+.config_div {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-flow: column wrap;
+  height: 500px;
+  line-height: 1.7;
+  width: 500px;
+}

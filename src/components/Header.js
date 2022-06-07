@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import md5 from 'crypto-js/md5';
 import { AiOutlineHome } from 'react-icons/ai';
+import style from './Header.module.css';
 
 class Header extends Component {
   constructor() {
@@ -34,24 +35,22 @@ class Header extends Component {
     const { playerHeaderName, playerHeaderScore } = this.props;
     const { userImage, redirect } = this.state;
     return (
-      <div className="div-header">
-        <header>
-          <img
-            className="userImg"
-            src={ `https://www.gravatar.com/avatar/${userImage}` }
-            alt={ playerHeaderName }
-            data-testid="header-profile-picture"
-          />
-          <h3 className="question" data-testid="header-player-name">
-            { playerHeaderName }
-          </h3>
-          <p className="question" data-testid="header-score">
-            { playerHeaderScore }
-          </p>
-        </header>
+      <header className={ style.div_header }>
+        <img
+          className={ style.userImg }
+          src={ `https://www.gravatar.com/avatar/${userImage}` }
+          alt={ playerHeaderName }
+          data-testid="header-profile-picture"
+        />
+        <h3 className={ style.question } data-testid="header-player-name">
+          { playerHeaderName }
+        </h3>
+        <p className={ style.question } data-testid="header-score">
+          { playerHeaderScore }
+        </p>
         <form>
           <button
-            className="home-btn"
+            className={ style.home_btn }
             data-testid="btn-go-home"
             id="btn-go-home"
             type="submit"
@@ -62,9 +61,8 @@ class Header extends Component {
             Home
           </button>
           { redirect && <Redirect to="/" /> }
-
         </form>
-      </div>
+      </header>
     );
   }
 }

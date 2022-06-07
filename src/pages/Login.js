@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchToken, startPlay } from '../redux/actions';
-import './Login.css';
+import style from './Login.module.css';
 import TriviaLogo from '../trivia.png';
 
 class Login extends React.Component {
@@ -48,11 +48,11 @@ class Login extends React.Component {
   render() {
     const { Username, email, isDisable } = this.state;
     return (
-      <div className="Login-container">
+      <div className={ style.Login_container }>
 
-        <div className="Form-container">
-          <img src={ TriviaLogo } alt="Logo" className="Trivia-logo" />
-          <form>
+        <div className={ style.Form_container }>
+          <img src={ TriviaLogo } alt="Logo" className={ style.Trivia_logo } />
+          <form className={ style.form }>
             <label htmlFor="email">
               Email:
               <input
@@ -62,6 +62,7 @@ class Login extends React.Component {
                 name="email"
                 value={ email }
                 onChange={ this.handleChange }
+                className={ style.input }
               />
             </label>
             <label htmlFor="Username">
@@ -73,6 +74,7 @@ class Login extends React.Component {
                 name="Username"
                 value={ Username }
                 onChange={ this.handleChange }
+                className={ style.input }
               />
             </label>
             <button
@@ -80,7 +82,7 @@ class Login extends React.Component {
               data-testid="btn-play"
               disabled={ isDisable }
               onClick={ this.handleSubmit }
-              className="Login-btn"
+              className={ style.Login_btn }
             >
               Play
             </button>
@@ -88,7 +90,7 @@ class Login extends React.Component {
               type="button"
               data-testid="btn-settings"
               onClick={ this.handleConfig }
-              className="Login-btn"
+              className={ style.Login_btn }
             >
               Configurações
             </button>

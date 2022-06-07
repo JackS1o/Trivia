@@ -1,4 +1,4 @@
-.Login-container {
+.Login_container {
   align-items: center;
   background-color: #282c34;
   display: flex;
@@ -7,7 +7,7 @@
   min-height: 100vh;
 }
 
-.Form-container {
+.Form_container {
   background-color: white;
   border-radius: 7px;
   display: flex;
@@ -16,12 +16,12 @@
   padding: 15px;
 }
 
-form {
+.form {
   display: flex;
   flex-direction: column;
 }
 
-input {
+.input {
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -30,7 +30,7 @@ input {
   width: 100%;
 }
 
-.Login-btn {
+.Login_btn {
   background-color: #285467;
   border: none;
   border-radius: 5px;
@@ -41,7 +41,7 @@ input {
   transition: 0.2s;
 }
 
-.Login-btn:disabled {
+.Login_btn:disabled {
   background-color: #282c34;
   border: none;
   border-radius: 5px;
@@ -49,11 +49,11 @@ input {
   pointer-events: none;
 }
 
-.Login-btn:hover {
+.Login_btn:hover {
   transform: scale(1.05);
 }
 
-.Trivia-logo {
+.Trivia_logo {
   animation: myAnim 2s ease 0s infinite normal forwards;
   height: 15vmin;
   margin-bottom: 1.5rem;
