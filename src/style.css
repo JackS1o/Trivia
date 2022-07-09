@@ -1,0 +1,193 @@
+/* body {
+  overflow: hidden;
+} */
+
+.main_div {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.game {
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  width: 500px;
+}
+
+/*
+.main_div, .main-div-feedback, .main-div-ranking {
+  align-items: center;
+  background-color: #282c34;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.game, .div-feedback, .div-ranking {
+  align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+  justify-content: space-evenly;
+  width: 500px;
+}
+
+.div-header {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.userImg {
+  border-radius: 50%;
+  height: 60px;
+}
+
+.home-btn {
+  background-color: #282c34;
+  border: 1px solid #282c34;
+  border-radius: 5px;
+  color: white;
+  font-weight: 700;
+}
+
+.home-btn:hover {
+  background-color: white;
+  border: 1px solid #282c34;
+  color: black;
+  font-weight: 700;
+}
+
+.question, .category {
+  padding: 10px;
+  text-align: center;
+}
+
+.section-game {
+  align-items: center;
+  display: flex;
+  font-size: 1.1rem;
+  justify-content: center;
+}
+
+.div-trivia {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  justify-content: space-between;
+  width: 500px;
+}
+
+.options {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.next-btn {
+  background-color: #282c34;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  height: 25px;
+  margin-top: 10px;
+  width: 60px;
+}
+
+.next-btn:hover {
+  background-color: white;
+  border: 1px solid #282c34;
+  color: black;
+  font-weight: 700;
+}
+
+.playAgain-btn {
+  background-color: rgba(52, 133, 52, 0.856);
+  border: 1px solid rgba(52, 133, 52, 0.856);
+  border-radius: 7px;
+  color: white;
+  display: inline-block;
+  font-weight: 700;
+  height: 40px;
+  position: relative;
+  transition: color 1s;
+  width: 100px;
+}
+
+.playAgain-btn:hover {
+  color: black;
+}
+
+.playAgain-btn:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: 1s;
+  width: 0;
+}
+
+.playAgain-btn:hover:before {
+  width: 150%;
+}
+
+.ranking-btn {
+  background-color: gold;
+  border: 1px solid black;
+  border-radius: 7px;
+  color: rgba(0, 0, 0, 0.562);
+  display: inline-block;
+  font-weight: 700;
+  height: 40px;
+  position: relative;
+  transition: color 1s;
+  width: 100px;
+}
+
+.ranking-btn:hover {
+  color: black;
+}
+
+.ranking-btn:before {
+  content: '';
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+  transition: 1s;
+  width: 0;
+}
+
+.ranking-btn:hover:before {
+  width: 150%;
+}
+
+.placar {
+  text-align: center;
+} */
+
+/* .divload {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+
+  0% { transform: rotate(0deg); }
+
+  100% { transform: rotate(360deg); }
+}
+ */

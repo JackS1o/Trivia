@@ -1,0 +1,73 @@
+.assert {
+  border: 3px solid rgb(6, 240, 15);
+}
+
+.error {
+  border: 3px solid red;
+}
+
+.div_trivia {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin: 50px 20px;
+  text-align: center;
+}
+
+.options {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.category {
+  padding: 10px;
+  text-align: center;
+}
+
+.answers_btn button {
+  background-color: white;
+  border-radius: 5px;
+  height: 30px;
+  margin: 5px 0;
+  transition: 0.2s;
+  width: 300px;
+}
+
+.answers_btn button:hover {
+  background-color: #282c34;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  transform: scale(1.05);
+}
+
+.answers_btn button:disabled {
+  background-color: white;
+  color: #b7b7b7;
+  cursor: auto;
+  font-weight: 500;
+  transform: scale(1);
+}
+
+.next_btn {
+  background-color: #364054;
+  border: 0;
+  border-radius: 10px;
+  color: white;
+  font-weight: 700;
+  height: 30px;
+  margin-top: 10px;
+  transition: 0.2s;
+  width: 100%;
+}
+
+.next_btn:hover {
+  background-color: #282c34;
+  color: white;
+  cursor: pointer;
+  font-weight: 700;
+  transform: scale(1.05);
+}
